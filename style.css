@@ -1,0 +1,459 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: grey;
+    margin: 0;
+    padding: 0;
+    /* reserve space for fixed navbar (updated via JS on load/resize) */
+    padding-top: 64px;
+}
+
+#navbar {
+    width: 100%;
+    background-color: #b71c1c; /* dark red */
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1300;
+    transition: transform 300ms ease, opacity 300ms ease;
+    will-change: transform, opacity;
+}
+
+/* Visible/hidden states for smooth fade/slide */
+#navbar.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+#navbar.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navbar {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.navbar-inner {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.brand {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.12rem;
+    letter-spacing: 0.3px;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-list li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: background 160ms ease, color 160ms ease, transform 120ms ease;
+    display: inline-block;
+}
+.nav-list li a:hover,
+.nav-list li a:focus,
+.nav-list li a:focus-visible {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    transform: translateY(-2px);
+    outline: none;
+}
+
+/* compact on narrow screens */
+@media (max-width: 700px) {
+  .navbar-inner { padding: 0 0.75rem; }
+  .nav-list { gap: 0.25rem; }
+  .nav-list li a { padding: 0.45rem 0.6rem; font-size: 0.95rem; }
+}
+
+.jumbotron {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        background-color: #111;
+        overflow: hidden;
+}
+
+/* Jumbotron carousel styles */
+.jumbo-carousel {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.jumbo-viewport {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.jumbo-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.02);
+    transition: opacity 600ms ease, transform 600ms ease;
+}
+.jumbo-slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+.jumbo-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.jumbo-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(0);
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+.jumbo-prev { left: 1rem; }
+.jumbo-next { right: 1rem; }
+
+.jumbo-indicators {
+    position: absolute;
+    left: 50%;
+    transform: translateX(0);
+    bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 3;
+}
+.jumbo-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 8, 8, 0.856);
+    cursor: pointer;
+    padding: 0;
+}
+.jumbo-indicators button.active { background: #fff; }
+
+/* smaller screens: reduce controls size */
+@media (max-width: 600px) {
+    .jumbo-nav { width: 40px; height: 40px; }
+    .jumbo-prev { left: 0.5rem; }
+    .jumbo-next { right: 0.5rem; }
+}
+
+.first_box_1 {
+    height: 60vh;
+    width: 100%;
+    background-color: green;
+}
+
+.first_box_2 {
+    height: 60vh;
+    width: 100%;
+    background-color: blue;
+}
+
+.first_box_3 {
+    height: 60vh;
+    width: 100%;
+    background-color: red;
+}
+.first_box {
+    height: 60vh;
+    width: 100%;
+    background-color: green;
+}
+
+.first_box {
+    height: 60vh;
+    width: 100%;
+    background-color: green;
+}
+
+.second_box {
+    height: auto;
+    width: 100%;
+    background-color: orange;
+}
+
+/* Parallax-ready layout for the first boxes */
+.first_box_1,
+.first_box_2,
+.first_box_3 {
+    position: relative; /* create positioning context for the image */
+    overflow: hidden;
+}
+
+.first_box_1 img,
+.first_box_2 img,
+.first_box_3 img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* center the image and allow JS to translate it for parallax */
+    transform: translate(-50%, -50%) translateY(var(--parallax, 0px));
+    will-change: transform;
+    /* allow extra width/height so horizontal translation doesn't reveal empty space */
+    min-width: 220%;
+    min-height: 130%;
+    object-fit: cover; /* fill while preserving aspect ratio */
+    display: block;
+}
+
+/* Horizontal layout for the three first boxes */
+.first-row {
+    display: block; /* stack sections vertically to be full-viewport width */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.first-row .first_box {
+    width: 100vw; /* full viewport width */
+    margin: 0; 
+    height: 80vh; /* larger section for more visible parallax */
+}
+
+/* Responsive: shorter height on narrow screens */
+@media (max-width: 900px) {
+    .first-row .first_box { width: 100%; height: 50vh; }
+}
+
+/* If you prefer a contained image (no cropping), uncomment below and adjust JS strength */
+/*
+.first_box_1 img, .first_box_2 img, .first_box_3 img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) translateY(var(--parallax, 0px));
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+*/
+
+:root {
+    --card-w: auto;
+    --card-h: 420px; /* keeps same size for all cards */
+    --gap: 2rem;
+}
+
+.carousel-section {
+    padding: 2.5rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.carousel {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* prev | track | next */
+    align-items: center;
+    gap: 1.5rem; /* increased space between prev/track/next buttons and carousel */
+}
+
+.track {
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    overflow-y: hidden; /* hide vertical overflow to avoid double scrollbars */
+    border-radius: 12px; /* clip children to rounded corners */
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0.5rem;
+    padding: 0.5rem; /* equal left/right padding so .carousel gap is visually consistent */
+    /* smooth scroll for nav buttons */
+    scroll-behavior: smooth;
+    /* hide scrollbar while preserving scrollability */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.track::-webkit-scrollbar {
+    height: 0; /* hide WebKit scrollbar */
+    display: none;
+}
+.track::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.card {
+    /* Default: one card per view (mobile) */
+    flex: 0 0 100%;
+    max-width: 100%;
+    height: var(--card-h);
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    scroll-snap-align: start;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+/* Responsive: 2 cards side-by-side */
+@media (min-width: 600px) {
+    .card {
+      flex: 0 0 calc((100% - var(--gap)) / 2);
+      max-width: calc((100% - var(--gap)) / 2);
+    }
+}
+
+/* Responsive: 3 cards side-by-side (fills 100% width together) */
+@media (min-width: 1000px) {
+    .card {
+      flex: 0 0 calc((100% - (var(--gap) * 2)) / 3);
+      max-width: calc((100% - (var(--gap) * 2)) / 3);
+    }
+}
+
+.card img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover; /* ensures same visual size */
+    display: block;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+.card-body {
+    padding: 0.75rem 1rem;
+}
+.card-body h3 {
+    margin: 1rem 0 0.25rem;
+    font-size: 1.1rem;
+}
+.card-body p {
+    margin: 0;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Prev/Next buttons */
+.nav {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: none;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+.nav:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* Hover/focus: make carousel buttons appear lighter */
+.nav, .jumbo-nav {
+    transition: background 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+
+.nav:hover, .nav:focus, .nav:focus-visible {
+    filter: brightness(1.35);
+    background: #2a2a2a;
+    transform: translateY(0);
+    outline: none;
+}
+
+.jumbo-nav:hover, .jumbo-nav:focus, .jumbo-nav:focus-visible {
+    filter: brightness(1.15);
+    background: rgba(0,0,0,0.6);
+    transform: translateY(0);
+    outline: none;
+}
+
+/* Responsive: show larger cards on wide screens */
+@media (min-width: 800px) {
+    :root {
+      --card-w: 360px;
+      --card-h: 460px;
+    }
+}
+
+/* Footer styles */
+.site-footer {
+    background: #0f1720;
+    color: #d1d5db;
+    padding: 2rem 1rem;
+}
+.site-footer .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.site-footer .brand {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 0.25rem;
+}
+.site-footer p { margin: 0; font-size: 0.95rem; color: #9ca3af; }
+.footer-links { list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0; }
+.footer-links a { color: #cbd5e1; text-decoration: none; padding: 0.25rem; border-radius: 6px; }
+.footer-links a:hover, .footer-links a:focus { background: rgba(255,255,255,0.03); color: #fff; }
+
+@media (max-width: 700px) {
+    .site-footer .footer-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .footer-links { width: 100%; justify-content: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+}
+
+/* Hover zoom: cards and image interactions (only on hover-capable devices) */
+@media (hover: hover) {
+    .card {
+        transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms ease, opacity 260ms ease;
+        transform-origin: center center;
+    }
+
+    
+
+    /* image-specific: zoom out (scale down) inside the hovered card */
+    .card img {
+        transition: transform 300ms cubic-bezier(.2,.9,.3,1);
+        will-change: transform;
+        transform-origin: center center;
+        transform: scale(1);
+    }
+
+    .track:hover .card:hover img {
+        transform: scale(1.14);
+    }
+}

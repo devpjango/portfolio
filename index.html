@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akiya Main</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="navbar">
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="#">Akiya</a>
+                <ul class="nav-list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="jumbotron">
+        <div class="jumbo-carousel" aria-roledescription="carousel">
+            <button class="jumbo-nav jumbo-prev" aria-label="Previous slide">‹</button>
+
+            <div class="jumbo-viewport">
+                <div class="jumbo-slide" data-index="0">
+                    <img src="https://picsum.photos/1600/900?random=21" alt="Jumbotron slide 1">
+                </div>
+                <div class="jumbo-slide" data-index="1">
+                    <img src="https://picsum.photos/1600/900?random=22" alt="Jumbotron slide 2">
+                </div>
+                <div class="jumbo-slide" data-index="2">
+                    <img src="https://picsum.photos/1600/900?random=23" alt="Jumbotron slide 3">
+                </div>
+            </div>
+
+            <button class="jumbo-nav jumbo-next" aria-label="Next slide">›</button>
+
+            <div class="jumbo-indicators" role="tablist" aria-label="Slide indicators">
+                <button data-slide-to="0" aria-label="Go to slide 1" class="active"></button>
+                <button data-slide-to="1" aria-label="Go to slide 2"></button>
+                <button data-slide-to="2" aria-label="Go to slide 3"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="first-row">
+        <div class="first_box first_box_1" data-parallax-mode="horizontal" data-parallax-strength-x="0.65">
+            <img src="https://picsum.photos/1600/900?random=24" alt="How it works 1">
+        </div>
+
+        <div class="first_box first_box_2" data-parallax-mode="horizontal" data-parallax-strength-x="-0.6">
+            <img src="https://picsum.photos/1600/900?random=25" alt="How it works 2">
+        </div>
+
+        <div class="first_box first_box_3" data-parallax-mode="horizontal" data-parallax-strength-x="0.55">
+            <img src="https://picsum.photos/1600/900?random=26" alt="How it works 3">
+        </div>
+    </div>
+
+    <div class="second_box">
+        <section class="carousel-section" aria-label="Image carousel with descriptions">
+        <h2>Featured projects</h2>
+
+        <div class="carousel">
+            <button class="nav prev" aria-label="Previous" type="button">‹</button>
+
+            <div class="track" tabindex="0">
+            <article class="card">
+                <img src="https://picsum.photos/600/400?random=1" alt="Project one preview" />
+                <div class="card-body">
+                <h3>Project One</h3>
+                <p>Short description about the first project. Clear, concise, and informative.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://picsum.photos/600/400?random=2" alt="Project two preview" />
+                <div class="card-body">
+                <h3>Project Two</h3>
+                <p>A brief summary highlighting the key features or results of this work.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://picsum.photos/600/400?random=3" alt="Project three preview" />
+                <div class="card-body">
+                <h3>Project Three</h3>
+                <p>Explain what makes this item notable and why someone should click in.</p>
+                </div>
+            </article>
+            <article class="card">
+                <img src="https://picsum.photos/600/400?random=1" alt="Project one preview" />
+                <div class="card-body">
+                <h3>Project One</h3>
+                <p>Short description about the first project. Clear, concise, and informative.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://picsum.photos/600/400?random=2" alt="Project two preview" />
+                <div class="card-body">
+                <h3>Project Two</h3>
+                <p>A brief summary highlighting the key features or results of this work.</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://picsum.photos/600/400?random=3" alt="Project three preview" />
+                <div class="card-body">
+                <h3>Project Three</h3>
+                <p>Explain what makes this item notable and why someone should click in.</p>
+                </div>
+            </article>
+            </div>
+
+            <button class="nav next" aria-label="Next" type="button">›</button>
+        </div>
+        </section>
+    </div>
+
+    <!-- other HTML content -->
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <a class="brand" href="#">Akiya</a>
+                <p>© 2025 Akiya. All rights reserved.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="carousel.js"></script>
+</body>
+</html>
