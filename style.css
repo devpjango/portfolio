@@ -95,6 +95,22 @@ body {
         position: relative;
         background-color: #111;
         overflow: hidden;
+        /* gradient overlay: white starts at --jumbo-gradient-start (default: 80%) and ends at bottom */
+        --jumbo-gradient-start: 75%;
+}
+
+/* gradient overlay that fades the jumbotron to white at the bottom */
+.jumbotron::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none; /* allow interactions through the overlay */
+    z-index: 1; /* sit above slides (which are set to z-index: 0) but below controls (z-index: 2+) */
+    background: linear-gradient(to bottom, rgba(255,255,255,0) var(--jumbo-gradient-start), rgba(255,255,255,1) 100%);
+    transition: opacity 200ms linear;
 }
 
 /* Jumbotron carousel styles */
@@ -120,7 +136,7 @@ body {
 .jumbo-slide.active {
     opacity: 1;
     transform: scale(1);
-    z-index: 1;
+    z-index: 0; /* lowered so the gradient overlay can sit above slides */
 }
 .jumbo-slide img {
     width: 100%;

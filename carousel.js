@@ -255,4 +255,49 @@ document.addEventListener("DOMContentLoaded", () => {
     // initial position
     onScroll();
   })();
+
+  /* ---------------- Jumbotron fade on scroll ---------------- */
+  (function initJumbotronFade(){
+    const jumboEl = document.querySelector('.jumbotron');
+    if (!jumboEl) return;
+
+    // smooth opacity transitions when updating
+    jumboEl.style.transition = 'opacity 200ms linear';
+
+    let ticking = false;
+
+    function update() {
+      const pageScroll = window.scrollY || window.pageYOffset;
+      const jumboTop = jumboEl.offsetTop;
+      const jumboHeight = jumboEl.offsetHeight;
+
+      // relative scroll inside the jumbotron (0 .. jumboHeight)
+      const relative = Math.min(Math.max(pageScroll - jumboTop, 0), jumboHeight);
+
+      // start fade at 80% of the jumbotron height
+      const fadeStart = jumboHeight * 0.8;
+
+      let progress = 0;
+      if (relative <= fadeStart) progress = 0;
+      else progress = (relative - fadeStart) / (jumboHeight - fadeStart);
+      progress = Math.min(Math.max(progress, 0), 1);
+
+      // set opacity from 1 -> 0 as progress goes 0 -> 1
+      jumboEl.style.opacity = String(1 - progress);
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    // set initial
+    update();
+  })();
+
 });
