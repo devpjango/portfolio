@@ -1,6 +1,8 @@
 html {
     margin: 0;
     padding: 0;
+    background-color: #ffffff;
+    overscroll-behavior: none;
 }
 
 body {
@@ -9,6 +11,7 @@ body {
     padding: 0;
     /* reserve space for fixed navbar (updated via JS on load/resize) */
     padding-top: 64px;
+    overscroll-behavior: none;
 }
 
 #navbar {
@@ -118,6 +121,7 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
+    background-color: #fff;
 }
 
 .jumbo-viewport {
