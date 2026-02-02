@@ -263,6 +263,13 @@ body {
     
 }
 
+.secon_box_1 {
+    height: 40vh;
+    width: 100%;
+    background-color: orange;
+    top: 5%;
+}
+
 .first_box_2 {
     height: 40vh;
     width: 100%;
@@ -285,7 +292,8 @@ body {
     height: 30vh;
     width: 100%;
     background-color: yellow;
-    padding: 2rem;
+    padding-top: 2rem;
+    padding-left: 4rem;
 }
 
 .second_box {
@@ -328,9 +336,10 @@ body {
 }
 
 .first-row .first_box {
-    width: 100vw; /* full viewport width */
+    width: 50vw; /* half viewport width */
     margin: 0; 
     height: 50vh; /* larger section for more visible parallax */
+    
 }
 
 .first-row .first_box_1 {
@@ -340,6 +349,18 @@ body {
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
+}
+
+.first-row .second_box_1 {
+    width: 50vw; /* half viewport width for first box */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: flex-start;
+    overflow: hidden;
+    background-color: orange;
+    
 }
 
 .parallax-text {
@@ -352,7 +373,8 @@ body {
     color: #fff;
     text-align: left;
     z-index: 10;
-    padding: 2rem;
+    padding-top: 2rem;
+    padding-left: 4rem;
     max-width: 90%;
     /* animate transform when the CSS variable changes */
     transition: transform 520ms cubic-bezier(.2,.8,.2,1);

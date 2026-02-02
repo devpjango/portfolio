@@ -250,13 +250,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // apply parallax to all text elements with clamping to stop at center
-        texts.forEach(text => {
+        texts.forEach((text, index) => {
           const textSH = parseFloat(text.dataset.parallaxStrengthX);
           const textStrengthH = Number.isFinite(textSH) ? textSH : 1.2;
           let textTx = Math.round(distance * textStrengthH);
           // clamp the text so it stops at the center (0)
           textTx = Math.min(textTx, 0);
           text.style.setProperty('--parallax-x', `${textTx}px`);
+          
+          // Reverse order opacity: last text disappears first when scrolling up
+          const reversedIndex = texts.length - 1 - index;
+          // Map distance to opacity: negative distance (scrolling up) reduces opacity
+          // Distance goes from positive (below) to negative (above)
+          // We want: when scrolling up, opacity decreases in reverse order
+          const opacityThreshold = reversedIndex * 150; // Each text needs more scroll up to disappear
+          const opacity = Math.max(0, Math.min(1, (distance + opacityThreshold) / 150));
+          text.style.opacity = opacity;
         });
       });
       ticking = false;
