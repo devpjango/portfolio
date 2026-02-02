@@ -160,10 +160,18 @@ document.addEventListener("DOMContentLoaded", () => {
     function nextSlide() { showSlide((current + 1) % slides.length); }
     function prevSlide() { showSlide((current - 1 + slides.length) % slides.length); }
 
+    function setLastClickedButton(btn) {
+      // remove active click state from all buttons
+      const allButtons = [prev, next, ...indicators];
+      allButtons.forEach(b => b?.classList.remove('clicked'));
+      // add it to the clicked button
+      if (btn) btn.classList.add('clicked');
+    }
+
     // attach controls
-    if (next) next.addEventListener('click', () => { pauseAuto(); nextSlide(); });
-    if (prev) prev.addEventListener('click', () => { pauseAuto(); prevSlide(); });
-    indicators.forEach((btn, i) => btn.addEventListener('click', () => { pauseAuto(); showSlide(i); }));
+    if (next) next.addEventListener('click', () => { pauseAuto(); nextSlide(); setLastClickedButton(next); });
+    if (prev) prev.addEventListener('click', () => { pauseAuto(); prevSlide(); setLastClickedButton(prev); });
+    indicators.forEach((btn, i) => btn.addEventListener('click', () => { pauseAuto(); showSlide(i); setLastClickedButton(btn); }));
 
     // keyboard
     jumbo.addEventListener('keydown', (e) => {
@@ -171,15 +179,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === 'ArrowLeft') { pauseAuto(); prevSlide(); }
     });
 
-    // auto play with pause on hover/focus
+    // auto play with pause on focus only (not on hover)
     function startAuto() {
       if (autoTimer) return;
       autoTimer = setInterval(nextSlide, AUTO_DELAY);
     }
     function pauseAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
 
-    jumbo.addEventListener('mouseenter', pauseAuto);
-    jumbo.addEventListener('mouseleave', startAuto);
+    // only pause on keyboard focus, not on mouse hover
     jumbo.addEventListener('focusin', pauseAuto);
     jumbo.addEventListener('focusout', startAuto);
 
@@ -191,8 +198,8 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------------- Parallax for first_box_1/2/3 ---------------- */
   (function initParallax(){
     const containers = Array.from(document.querySelectorAll('.first_box_1, .first_box_2, .first_box_3'))
-      .map(el => ({ el, img: el.querySelector('img') }))
-      .filter(x => x.img);
+      .map(el => ({ el, img: el.querySelector('img'), texts: el.querySelectorAll('.parallax-text') }))
+      .filter(x => x.img || x.texts.length > 0);
     if (!containers.length) return;
 
     let ticking = false;
@@ -202,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function update() {
       const vh = window.innerHeight;
-      containers.forEach(({el, img}) => {
+      containers.forEach(({el, img, texts}) => {
         const rect = el.getBoundingClientRect();
         // element center relative to viewport center
         const elCenter = rect.top + rect.height / 2;
@@ -238,7 +245,19 @@ document.addEventListener("DOMContentLoaded", () => {
           tx = translateX;
         }
 
-        img.style.transform = `translate(-50%, -50%) translateX(${tx}px) translateY(${ty}px)`;
+        if (img) {
+          img.style.transform = `translate(-50%, -50%) translateX(${tx}px) translateY(${ty}px)`;
+        }
+
+        // apply parallax to all text elements with clamping to stop at center
+        texts.forEach(text => {
+          const textSH = parseFloat(text.dataset.parallaxStrengthX);
+          const textStrengthH = Number.isFinite(textSH) ? textSH : 1.2;
+          let textTx = Math.round(distance * textStrengthH);
+          // clamp the text so it stops at the center (0)
+          textTx = Math.min(textTx, 0);
+          text.style.setProperty('--parallax-x', `${textTx}px`);
+        });
       });
       ticking = false;
     }
