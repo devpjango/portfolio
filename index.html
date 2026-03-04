@@ -28,7 +28,7 @@
     </div>
 
     <div class="jumbotron">
-        <div class="jumbo-carousel" aria-roledescription="carousel">
+        <div class="jumbo-carousel" role="region" aria-roledescription="carousel">
             <button class="jumbo-nav jumbo-prev" aria-label="Previous slide">‹</button>
 
             <div class="jumbo-viewport">
@@ -39,16 +39,16 @@
                     <img src="images/sakura.jpg" alt="Jumbotron slide 2">
                 </div>
                 <div class="jumbo-slide" data-index="2">
-                    <img src="images/outer_view_6.jpg" alt="Jumbotron slide 3">
+                    <img src="images/outer_view_6.jpg" alt="Traditional Japanese house with dark timber framing and white plaster walls, nestled among autumn foliage in shades of gold, orange, and green. The gabled roof features dark tiles with ornamental ridge details. Lush trees surround the structure, creating a serene and harmonious natural setting.">
                 </div>
             </div>
 
             <button class="jumbo-nav jumbo-next" aria-label="Next slide">›</button>
 
             <div class="jumbo-indicators" role="tablist" aria-label="Slide indicators">
-                <button data-slide-to="0" aria-label="Go to slide 1" class="active"></button>
-                <button data-slide-to="1" aria-label="Go to slide 2"></button>
-                <button data-slide-to="2" aria-label="Go to slide 3"></button>
+                <button role="tab" data-slide-to="0" aria-label="Go to slide 1" class="active" aria-selected="true"></button>
+                <button role="tab" data-slide-to="1" aria-label="Go to slide 2" aria-selected="false"></button>
+                <button role="tab" data-slide-to="2" aria-label="Go to slide 3" aria-selected="false"></button>
             </div>
         </div>
     </div>

@@ -263,11 +263,13 @@ body {
     
 }
 
-.secon_box_1 {
+.second_box_1 {
     height: 40vh;
     width: 100%;
     background-color: orange;
     top: 5%;
+    padding-top: 2rem;
+    padding-left: 4rem;
 }
 
 .first_box_2 {
@@ -290,7 +292,7 @@ body {
 
 .first_box_full_1 {
     height: 30vh;
-    width: 100%;
+    width: 100%;    
     background-color: yellow;
     padding-top: 2rem;
     padding-left: 4rem;
@@ -349,6 +351,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .first-row .second_box_1 {
@@ -360,7 +363,7 @@ body {
     justify-content: flex-start;
     overflow: hidden;
     background-color: orange;
-    
+    box-sizing: border-box;
 }
 
 .parallax-text {
@@ -456,7 +459,6 @@ body {
     scroll-behavior: smooth;
     /* hide scrollbar while preserving scrollability */
     -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
 }
 
 .track::-webkit-scrollbar {
