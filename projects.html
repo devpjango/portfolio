@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Akiya Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="navbar">
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="index.html">Akiya</a>
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <input type="text" class="search-bar" placeholder="Search...">
+                        <button class="search-btn" aria-label="Search">🔍</button>
+                    </div>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <main class="page-content">
+        <section class="projects-section">
+            <h1>Projects</h1>
+            <p>Welcome — here are selected projects. Replace this text with project listings or details.</p>
+
+            <div class="projects-grid">
+                <a href="#" class="card project-card project-link" data-title="Project A" data-desc="Brief summary of Project A. Explain technologies used and outcomes." data-image="https://picsum.photos/1200/800?random=11" data-link="#">
+                    <img src="https://picsum.photos/800/500?random=11" alt="Project A preview">
+                    <div class="card-body">
+                        <h3>Project A</h3>
+                        <p>Brief summary of Project A. Explain technologies used and outcomes.</p>
+                    </div>
+                </a>
+
+                <a href="#" class="card project-card project-link" data-title="Project B" data-desc="Short description of Project B. Link to repo or case study where relevant." data-image="https://picsum.photos/1200/800?random=12" data-link="#">
+                    <img src="https://picsum.photos/800/500?random=12" alt="Project B preview">
+                    <div class="card-body">
+                        <h3>Project B</h3>
+                        <p>Short description of Project B. Link to repo or case study where relevant.</p>
+                    </div>
+                </a>
+
+                <a href="#" class="card project-card project-link" data-title="Project C" data-desc="A concise explanation of Project C and the impact it delivered." data-image="https://picsum.photos/1200/800?random=13" data-link="#">
+                    <img src="https://picsum.photos/800/500?random=13" alt="Project C preview">
+                    <div class="card-body">
+                        <h3>Project C</h3>
+                        <p>A concise explanation of Project C and the impact it delivered.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Modal for project details -->
+            <div id="project-modal" class="modal" aria-hidden="true">
+                <div class="modal-overlay" data-action="close"></div>
+                <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+                    <button class="modal-close" aria-label="Close" data-action="close">×</button>
+                    <div class="modal-body">
+                        <img class="modal-image" src="" alt="">
+                        <h2 id="project-modal-title"></h2>
+                        <p class="modal-desc"></p>
+                        <p class="modal-actions"><a class="modal-link" href="#" target="_blank" rel="noopener">Open project</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <a class="brand" href="index.html">Akiya</a>
+                <p>© 2025 Akiya. All rights reserved.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

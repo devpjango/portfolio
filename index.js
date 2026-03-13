@@ -329,3 +329,99 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
 });
+
+/* ---------------- Active nav links + Contact form handler ---------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  // mark active nav links (header + footer)
+  try {
+    const path = window.location.pathname.split('/').pop() || 'index.html';
+    const links = Array.from(document.querySelectorAll('.nav-list a, .footer-links a'));
+    links.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      if (href === path || (href === 'index.html' && path === '')) {
+        a.classList.add('active-nav');
+        a.setAttribute('aria-current', 'page');
+      }
+    });
+  } catch (e) {
+    // ignore
+  }
+
+  // contact form: compose mailto and open mail client
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const name = encodeURIComponent(form.name.value.trim());
+      const email = encodeURIComponent(form.email.value.trim());
+      const message = encodeURIComponent(form.message.value.trim());
+      const subject = encodeURIComponent('Contact from portfolio: ' + (form.name.value.trim() || '')); 
+      const body = encodeURIComponent(`Name: ${form.name.value}\nEmail: ${form.email.value}\n\n${form.message.value}`);
+      // open mail client
+      window.location.href = `mailto:you@example.com?subject=${subject}&body=${body}`;
+    });
+  }
+});
+
+/* ---------------- Project modal behavior ---------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('project-modal');
+  if (!modal) return;
+  const overlay = modal.querySelector('.modal-overlay');
+  const dialog = modal.querySelector('.modal-dialog');
+  const imgEl = modal.querySelector('.modal-image');
+  const titleEl = modal.querySelector('#project-modal-title');
+  const descEl = modal.querySelector('.modal-desc');
+  const linkEl = modal.querySelector('.modal-link');
+  const closeButtons = modal.querySelectorAll('[data-action="close"]');
+
+  function openModal(data) {
+    imgEl.src = data.image || '';
+    imgEl.alt = data.title || '';
+    titleEl.textContent = data.title || '';
+    descEl.textContent = data.desc || '';
+    linkEl.href = data.link || '#';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    // focus close button for accessibility
+    const btn = modal.querySelector('.modal-close');
+    if (btn) btn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // attach click openers for project links and plain .card elements
+  const linkNodes = Array.from(document.querySelectorAll('.project-link'));
+  const cardNodes = Array.from(document.querySelectorAll('.card'))
+    .filter(c => !c.closest('a') && c.querySelector('.card-body h3'));
+
+  // make non-link cards keyboard-focusable
+  cardNodes.forEach(c => {
+    if (!c.hasAttribute('tabindex')) c.setAttribute('tabindex', '0');
+    if (!c.getAttribute('role')) c.setAttribute('role', 'button');
+  });
+
+  const openers = [...linkNodes, ...cardNodes];
+  openers.forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = el.dataset.title || el.querySelector('.card-body h3')?.textContent || '';
+      const desc = el.dataset.desc || el.querySelector('.card-body p')?.textContent || '';
+      const image = el.dataset.image || el.querySelector('img')?.src || '';
+      const link = el.dataset.link || el.getAttribute('href') || '#';
+      const data = { title, desc, image, link };
+      openModal(data);
+    });
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+  });
+
+  // close handlers
+  overlay.addEventListener('click', closeModal);
+  closeButtons.forEach(b => b.addEventListener('click', closeModal));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+});

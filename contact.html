@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Akiya Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="navbar">
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="index.html">Akiya</a>
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <input type="text" class="search-bar" placeholder="Search...">
+                        <button class="search-btn" aria-label="Search">🔍</button>
+                    </div>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <main class="page-content">
+        <section class="contact-section">
+            <h1>Contact</h1>
+            <p>Contact details or a contact form can be placed here.</p>
+
+            <form id="contact-form" class="contact-form">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required>
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+
+                <button type="submit">Send Message</button>
+                <p class="contact-note">This form opens your mail client with a prefilled message.</p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <a class="brand" href="index.html">Akiya</a>
+                <p>© 2025 Akiya. All rights reserved.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

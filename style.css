@@ -144,6 +144,59 @@ body {
     outline: none;
 }
 
+/* Active/navigation current page */
+.nav-list li a.active-nav,
+.nav-list li a[aria-current="page"] {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* Projects grid (reuses .card styles) */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 1.25rem auto 3rem;
+    padding: 0 1rem;
+}
+/* Ensure project cards never shrink below a usable size */
+.projects-grid .card,
+.projects-grid .project-card {
+    min-width: 70px;
+}
+@media (min-width: 800px) {
+    .projects-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Contact form */
+.contact-form { max-width: 700px; margin: 1rem auto 3rem; display: grid; gap: 0.6rem; padding: 0 1rem; }
+.contact-form label { font-weight: 600; }
+.contact-form input, .contact-form textarea { padding: 0.6rem; border-radius: 8px; border: 1px solid #d1d5db; font-size: 1rem; }
+.contact-form button { padding: 0.75rem 1rem; background: #b71c1c; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+.contact-note { font-size: 0.9rem; color: #9ca3af; margin: 0; }
+
+/* make project card links obvious */
+.project-link { display: block; color: inherit; text-decoration: none; cursor: pointer; }
+.project-link:focus { outline: 3px solid rgba(183,28,28,0.25); }
+
+/* Modal styles */
+.modal { display: none; position: fixed; inset: 0; z-index: 2000; align-items: center; justify-content: center; }
+.modal.open { display: flex; }
+.modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+.modal-dialog { position: relative; z-index: 2001; width: 92%; max-width: 900px; background: #fff; border-radius: 12px; box-shadow: 0 20px 60px rgba(2,6,23,0.6); overflow: hidden; }
+.modal-body { padding: 1rem 1.25rem 2rem; }
+.modal-image { width: 100%; height: 360px; object-fit: cover; display: block; }
+.modal-close { position: absolute; right: 10px; top: 8px; background: transparent; border: none; font-size: 1.6rem; cursor: pointer; color: #111; }
+.modal-desc { margin-top: 0.75rem; color: #333; }
+.modal-actions { margin-top: 1rem; }
+.modal-link { display: inline-block; padding: 0.6rem 0.9rem; background: #b71c1c; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700; }
+
+@media (min-width: 600px) {
+    .modal-image { height: 420px; }
+}
+
 /* compact on narrow screens */
 @media (max-width: 700px) {
   .navbar-inner { padding: 0 0.75rem; }
@@ -473,6 +526,7 @@ body {
     /* Default: one card per view (mobile) */
     flex: 0 0 100%;
     max-width: 100%;
+    min-width: 50px;
     height: var(--card-h);
     border: 1px solid #e3e3e3;
     border-radius: 12px;
