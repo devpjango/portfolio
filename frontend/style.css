@@ -16,7 +16,7 @@ body {
 
 #navbar {
     width: 100%;
-    background-color: #b71c1c; /* dark red */
+    background-color: #023F05; /* dark red */
     position: fixed;
     left: 0;
     right: 0;
@@ -346,7 +346,7 @@ body {
 .first_box_full_1 {
     height: 30vh;
     width: 100%;    
-    background-color: yellow;
+    background-color: #E2EFD1;
     padding-top: 2rem;
     padding-left: 4rem;
 }
@@ -354,7 +354,7 @@ body {
 .second_box {
     height: auto;
     width: 100%;
-    background-color: orange;
+    background-color: #E2EFD1;
 }
 
 /* Parallax-ready layout for the first boxes */
@@ -415,7 +415,7 @@ body {
     align-items: left;
     justify-content: flex-start;
     overflow: hidden;
-    background-color: orange;
+    background-color: #E2EFD1   ;
     box-sizing: border-box;
 }
 
@@ -619,7 +619,7 @@ body {
 
 /* Footer styles */
 .site-footer {
-    background: #0f1720;
+    background: #023F05;
     color: #d1d5db;
     padding: 2rem 1rem;
 }

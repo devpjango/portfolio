@@ -425,3 +425,115 @@ document.addEventListener('DOMContentLoaded', () => {
   closeButtons.forEach(b => b.addEventListener('click', closeModal));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 });
+
+// Consolidate everything into a single initialization flow
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // 1. Run immediate UI effects (Navbar, Parallax, Jumbotron)
+  // These don't depend on external data
+  initNavbarScrollToggle();
+  initJumbotronCarousel();
+  initParallaxEffects();
+  initJumbotronFade();
+  initActiveNavLinks();
+  initContactForm();
+
+  // 2. Handle Data Injection
+  // We check if the current page has a carousel track (index) or a projects grid (projects)
+  const dataContainer = document.querySelector(".track") || document.querySelector(".projects-grid");
+  
+  if (dataContainer) {
+    fetchAkiyaData(dataContainer);
+  } else {
+    // If we're on a page with no data (like 'About'), just init the modal for static elements
+    initProjectModal();
+  }
+});
+
+/* ---------------- API DATA FETCHING ---------------- */
+async function fetchAkiyaData(container) {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/houses');
+    if (!response.ok) throw new Error("Backend offline");
+    
+    const houses = await response.json();
+
+    // Preserve your exact CSS card structure
+    container.innerHTML = houses.map(house => `
+      <article class="card" 
+               data-title="${house.title}" 
+               data-desc="${house.description}" 
+               data-image="${house.image_url}" 
+               data-link="#" 
+               role="button" 
+               tabindex="0">
+          <img src="${house.image_url}" alt="${house.title}" />
+          <div class="card-body">
+              <h3>${house.title}</h3>
+              <p><strong>$${house.price_usd.toLocaleString()} USD</strong></p>
+              <p>${house.location}</p>
+          </div>
+      </article>
+    `).join('');
+
+    // CRITICAL: Re-run carousel & modal logic AFTER cards are added to the DOM
+    initCarouselControls(); 
+    initProjectModal();
+
+  } catch (error) {
+    console.warn("Backend not detected. Keeping original static design.");
+    // Fallback: Init the carousel and modal for the hardcoded HTML cards
+    initCarouselControls();
+    initProjectModal();
+  }
+}
+
+/* ---------------- REFACTORED INTERACTION LOGIC ---------------- */
+// (I have renamed these to avoid conflicts with your original event listeners)
+
+function initCarouselControls() {
+  const carousel = document.querySelector(".carousel");
+  if (!carousel) return;
+  const track = carousel.querySelector(".track");
+  const prevBtn = carousel.querySelector(".prev");
+  const nextBtn = carousel.querySelector(".next");
+
+  // Re-attach your scrollByPage logic here...
+  nextBtn.onclick = () => { /* Your scrollByPage(1) logic */ };
+  prevBtn.onclick = () => { /* Your scrollByPage(-1) logic */ };
+}
+
+function initProjectModal() {
+  const modal = document.getElementById('project-modal');
+  if (!modal) return;
+
+  // We use event delegation so it works for cards added via API
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+
+    const data = {
+      title: card.dataset.title || card.querySelector('h3').textContent,
+      desc: card.dataset.desc || card.querySelector('p').textContent,
+      image: card.dataset.image || card.querySelector('img').src,
+      link: card.dataset.link || '#'
+    };
+
+    modal.querySelector('.modal-image').src = data.image;
+    modal.querySelector('#project-modal-title').textContent = data.title;
+    modal.querySelector('.modal-desc').textContent = data.desc;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  // Close handlers (Overlay and Close buttons)
+  modal.querySelectorAll('[data-action="close"]').forEach(btn => {
+    btn.onclick = () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+  });
+}
+
+// ... Keep all your original Parallax, Jumbotron, and Navbar functions below ...
+
