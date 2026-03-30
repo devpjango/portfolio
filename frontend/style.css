@@ -156,15 +156,15 @@ body {
 .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 4rem;
     max-width: 1200px;
-    margin: 1.25rem auto 3rem;
+    margin: 4rem auto;
     padding: 0 1rem;
 }
 /* Ensure project cards never shrink below a usable size */
 .projects-grid .card,
 .projects-grid .project-card {
-    min-width: 70px;
+    min-width: 100%;
 }
 @media (min-width: 800px) {
     .projects-grid { grid-template-columns: repeat(3, 1fr); }
@@ -564,6 +564,7 @@ body {
 .card-body {
     padding: 0.75rem 1rem;
 }
+
 .card-body h3 {
     margin: 1rem 0 0.25rem;
     font-size: 1.1rem;
@@ -624,7 +625,7 @@ body {
     padding: 2rem 1rem;
 }
 .site-footer .footer-inner {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     display: flex;
     gap: 1rem;
@@ -668,4 +669,10 @@ body {
     .track:hover .card:hover img {
         transform: scale(1.14);
     }
+}
+
+/* Projects Page */
+
+.projects-section {
+    padding-left: 4rem;
 }
