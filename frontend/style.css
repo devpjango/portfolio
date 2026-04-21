@@ -398,7 +398,7 @@ body {
 }
 
 .first-row .first_box_1 {
-    width: 50vw; /* half viewport width for first box */
+    width: 50%; /* half container width for first box */
     position: relative;
     display: flex;
     align-items: center;
@@ -408,7 +408,7 @@ body {
 }
 
 .first-row .second_box_1 {
-    width: 50vw; /* half viewport width for first box */
+    width: 50%; /* half container width for first box */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -438,8 +438,8 @@ body {
 
 /* Staggered delays: 0s, 0.2s, 0.4s */
 .parallax-text:nth-of-type(1) { transition-delay: none }
-.parallax-text:nth-of-type(2) { transition-delay: 0.1s; }
-.parallax-text:nth-of-type(3) { transition-delay: 0.3s; }
+.parallax-text:nth-of-type(2) { transition-delay: none; }
+.parallax-text:nth-of-type(3) { transition-delay: none; }
 
 /* if you need different vertical positions keep them here */
 .parallax-text:first-of-type { top: 5%; }

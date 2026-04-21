@@ -249,21 +249,24 @@ document.addEventListener("DOMContentLoaded", () => {
           img.style.transform = `translate(-50%, -50%) translateX(${tx}px) translateY(${ty}px)`;
         }
 
-        // apply parallax to all text elements with clamping to stop at center
+        // apply parallax to all text elements with staggered sliding and opacity
         texts.forEach((text, index) => {
           const textSH = parseFloat(text.dataset.parallaxStrengthX);
           const textStrengthH = Number.isFinite(textSH) ? textSH : 1.2;
           let textTx = Math.round(distance * textStrengthH);
-          // clamp the text so it stops at the center (0)
-          textTx = Math.min(textTx, 0);
+          
+          if (distance > 0) {
+            // Sliding in (scrolling up): stagger in reverse order (last first)
+            textTx = Math.min(textTx - (texts.length - 1 - index) * 50, 0);
+          } else {
+            // Sliding out (scrolling down): stagger in reverse order (last first)
+            textTx = Math.max(textTx, -500 + (texts.length - 1 - index) * 100);
+          }
+          
           text.style.setProperty('--parallax-x', `${textTx}px`);
           
-          // Reverse order opacity: last text disappears first when scrolling up
-          const reversedIndex = texts.length - 1 - index;
-          // Map distance to opacity: negative distance (scrolling up) reduces opacity
-          // Distance goes from positive (below) to negative (above)
-          // We want: when scrolling up, opacity decreases in reverse order
-          const opacityThreshold = reversedIndex * 150; // Each text needs more scroll up to disappear
+          // Opacity: disappear in reverse order when scrolling down, appear in order when scrolling up
+          const opacityThreshold = (texts.length - 1 - index) * 150;
           const opacity = Math.max(0, Math.min(1, (distance + opacityThreshold) / 150));
           text.style.opacity = opacity;
         });
