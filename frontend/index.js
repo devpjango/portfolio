@@ -333,6 +333,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+/* ---------------- Hamburger Menu ---------------- */
+function initHamburgerMenu() {
+  const hamburger = document.querySelector('.hamburger');
+  const navList = document.querySelector('.nav-list');
+  if (!hamburger || !navList) return;
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.contains('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', !isOpen);
+    navList.classList.toggle('mobile');
+  });
+
+  // Close menu when clicking outside or on a link
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      navList.classList.remove('mobile');
+    }
+  });
+
+  // Close menu when a link is clicked
+  navList.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      navList.classList.remove('mobile');
+    }
+  });
+}
+
 /* ---------------- Active nav links + Contact form handler ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
   // mark active nav links (header + footer)
@@ -440,6 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initJumbotronFade();
   initActiveNavLinks();
   initContactForm();
+  initHamburgerMenu();
 
   // 2. Handle Data Injection
   // We check if the current page has a carousel track (index) or a projects grid (projects)

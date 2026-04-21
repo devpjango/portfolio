@@ -160,6 +160,67 @@ body {
     transform: translateY(-2px);
 }
 
+/* Hamburger menu button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 1rem;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger.open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile menu */
+.nav-list.mobile {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #023F05;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.nav-list.mobile li {
+    width: 100%;
+}
+
+.nav-list.mobile li a {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
 /* Projects grid (reuses .card styles) */
 .projects-grid {
     display: grid;
@@ -315,6 +376,12 @@ body {
     .jumbo-nav { width: 40px; height: 40px; }
     .jumbo-prev { left: 0.5rem; }
     .jumbo-next { right: 0.5rem; }
+}
+
+/* Mobile navbar for screens 800px and below */
+@media (max-width: 800px) {
+    .nav-list { display: none; }
+    .hamburger { display: flex; }
 }
 
 .first_box_1 {
